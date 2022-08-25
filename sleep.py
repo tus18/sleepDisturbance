@@ -10,11 +10,11 @@ import subprocess
 face_detector = dlib.get_frontal_face_detector()
 
 cap = cv.VideoCapture(0)#カメラの取得
-face_cascade = cv.CascadeClassifier("haarcascade_frontalface_default.xml")#分類器
 face_parts_detector = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")#ポイント位置を出力するツール
 
 EYE_AR_THRESH = 0.2
 count = 0
+COUNT_MAX = 40
 name='music'#音のファイル名
 cmd = "python sub.py "+str(name)#サブプロセスの呼び出しコマンド
 
@@ -52,7 +52,6 @@ def face_landmark_find(img):
 
 while True:
     ret,rgb = cap.read()
-    gray = cv.cvtColor(rgb,cv.COLOR_RGB2GRAY)
     rgb,eye = face_landmark_find(rgb)
 
     if eye < EYE_AR_THRESH:
@@ -64,7 +63,7 @@ while True:
     cv.imshow("frame",rgb)
 
     #音楽を流す処理ここから
-    if count > 40:
+    if count > COUNT_MAX:
         a=random.randint(-100,100)
         b=random.randint(-50,50)
         c=random.randint(-20,20)
