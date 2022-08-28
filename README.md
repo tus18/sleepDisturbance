@@ -21,5 +21,5 @@ $ git clone git@github.com:tus18/sleepDisturbance.git
 $ python sleep.py
 ```
 3. プログラム終了
-4. 
+
 Escキーで終了（音楽再生中は無効）
