@@ -6,13 +6,13 @@ from scipy.spatial import distance
 import random
 from msvcrt import getch
 import subprocess
+import writeF
 
 face_detector = dlib.get_frontal_face_detector()
 
 cap = cv.VideoCapture(0)#カメラの取得
 face_parts_detector = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")#ポイント位置を出力するツール
 
-EYE_AR_THRESH = 0.2
 count = 0
 COUNT_MAX = 40
 name='music'#音のファイル名
@@ -49,7 +49,10 @@ def face_landmark_find(img):
 
     return img,eye
 
-
+writeF.insert()
+f = open('user.txt')
+lins = f.readlines()
+EYE_AR_THRESH = float(lins[1])
 while True:
     ret,rgb = cap.read()
     rgb,eye = face_landmark_find(rgb)
